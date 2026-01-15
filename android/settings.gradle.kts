@@ -22,6 +22,11 @@ dependencyResolutionManagement {
         mavenCentral()
         maven { url = uri("https://jitpack.io") }
     }
+    versionCatalogs {
+        create("libs") {
+            from(files("../node_modules/react-native/gradle/libs.versions.toml"))
+        }
+    }
 }
 
 rootProject.name = "Fire"
