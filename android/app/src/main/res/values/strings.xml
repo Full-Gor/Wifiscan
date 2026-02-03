@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Fire</string>
+    <string name="app_name">Wifiscan</string>
     <string name="vpn_notification_channel">Firewall VPN</string>
     <string name="vpn_notification_title">Fire Firewall Active</string>
     <string name="vpn_notification_text">Protecting your network traffic</string>
