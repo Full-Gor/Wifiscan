@@ -24,7 +24,7 @@ dependencyResolutionManagement {
     }
     versionCatalogs {
         create("libs") {
-            from(files("../node_modules/react-native/gradle/libs.versions.toml"))
+            from(files("gradle/libs.versions.toml"))
         }
     }
 }
