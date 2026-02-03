@@ -11,3 +11,22 @@ index 4a0905d..77266d9 100644
  
  tasks.register("build") {
    dependsOn(
+diff --git a/node_modules/@react-native/gradle-plugin/settings.gradle.kts b/node_modules/@react-native/gradle-plugin/settings.gradle.kts
+index b3c46a3..7c4fce7 100644
+--- a/node_modules/@react-native/gradle-plugin/settings.gradle.kts
++++ b/node_modules/@react-native/gradle-plugin/settings.gradle.kts
+@@ -15,6 +15,14 @@ pluginManagement {
+ 
+ plugins { id("org.gradle.toolchains.foojay-resolver-convention").version("0.5.0") }
+ 
++dependencyResolutionManagement {
++  versionCatalogs {
++    create("libs") {
++      from(files("gradle/libs.versions.toml"))
++    }
++  }
++}
++
+ include(
+     ":react-native-gradle-plugin",
+     ":settings-plugin",
