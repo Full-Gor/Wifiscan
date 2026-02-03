@@ -11,22 +11,118 @@ index 4a0905d..77266d9 100644
  
  tasks.register("build") {
    dependsOn(
-diff --git a/node_modules/@react-native/gradle-plugin/settings.gradle.kts b/node_modules/@react-native/gradle-plugin/settings.gradle.kts
-index b3c46a3..7c4fce7 100644
---- a/node_modules/@react-native/gradle-plugin/settings.gradle.kts
-+++ b/node_modules/@react-native/gradle-plugin/settings.gradle.kts
-@@ -15,6 +15,14 @@ pluginManagement {
+diff --git a/node_modules/@react-native/gradle-plugin/react-native-gradle-plugin/build.gradle.kts b/node_modules/@react-native/gradle-plugin/react-native-gradle-plugin/build.gradle.kts
+index f8e62cb..ba9f7e3 100644
+--- a/node_modules/@react-native/gradle-plugin/react-native-gradle-plugin/build.gradle.kts
++++ b/node_modules/@react-native/gradle-plugin/react-native-gradle-plugin/build.gradle.kts
+@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
+ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
  
- plugins { id("org.gradle.toolchains.foojay-resolver-convention").version("0.5.0") }
+ plugins {
+-  alias(libs.plugins.kotlin.jvm)
++  id("org.jetbrains.kotlin.jvm") version "2.1.20"
+   id("java-gradle-plugin")
+ }
  
-+dependencyResolutionManagement {
-+  versionCatalogs {
-+    create("libs") {
-+      from(files("gradle/libs.versions.toml"))
-+    }
-+  }
-+}
-+
- include(
-     ":react-native-gradle-plugin",
-     ":settings-plugin",
+@@ -41,16 +41,15 @@ dependencies {
+   implementation(gradleApi())
+ 
+   // The KGP/AGP version is defined by React Native Gradle plugin.
+-  // Therefore we specify an implementation dep rather than a compileOnly.
+-  implementation(libs.kotlin.gradle.plugin)
+-  implementation(libs.android.gradle.plugin)
++  implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:2.1.20")
++  implementation("com.android.tools.build:gradle:8.11.0")
+ 
+-  implementation(libs.gson)
+-  implementation(libs.guava)
+-  implementation(libs.javapoet)
++  implementation("com.google.code.gson:gson:2.8.9")
++  implementation("com.google.guava:guava:31.0.1-jre")
++  implementation("com.squareup:javapoet:1.13.0")
+ 
+-  testImplementation(libs.junit)
+-  testImplementation(libs.assertj)
++  testImplementation("junit:junit:4.13.2")
++  testImplementation("org.assertj:assertj-core:3.25.1")
+   testImplementation(project(":shared-testutil"))
+ }
+ 
+diff --git a/node_modules/@react-native/gradle-plugin/settings-plugin/build.gradle.kts b/node_modules/@react-native/gradle-plugin/settings-plugin/build.gradle.kts
+index bd11ca6..057794c 100644
+--- a/node_modules/@react-native/gradle-plugin/settings-plugin/build.gradle.kts
++++ b/node_modules/@react-native/gradle-plugin/settings-plugin/build.gradle.kts
+@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
+ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+ 
+ plugins {
+-  alias(libs.plugins.kotlin.jvm)
++  id("org.jetbrains.kotlin.jvm") version "2.1.20"
+   id("java-gradle-plugin")
+ }
+ 
+@@ -35,12 +35,12 @@ dependencies {
+   implementation(project(":shared"))
+ 
+   implementation(gradleApi())
+-  implementation(libs.gson)
+-  implementation(libs.guava)
+-  implementation(libs.javapoet)
++  implementation("com.google.code.gson:gson:2.8.9")
++  implementation("com.google.guava:guava:31.0.1-jre")
++  implementation("com.squareup:javapoet:1.13.0")
+ 
+-  testImplementation(libs.junit)
+-  testImplementation(libs.assertj)
++  testImplementation("junit:junit:4.13.2")
++  testImplementation("org.assertj:assertj-core:3.25.1")
+   testImplementation(project(":shared-testutil"))
+ }
+ 
+diff --git a/node_modules/@react-native/gradle-plugin/shared-testutil/build.gradle.kts b/node_modules/@react-native/gradle-plugin/shared-testutil/build.gradle.kts
+index 4c1a1ec..1d587a9 100644
+--- a/node_modules/@react-native/gradle-plugin/shared-testutil/build.gradle.kts
++++ b/node_modules/@react-native/gradle-plugin/shared-testutil/build.gradle.kts
+@@ -10,13 +10,13 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+ import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
+ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+ 
+-plugins { alias(libs.plugins.kotlin.jvm) }
++plugins { id("org.jetbrains.kotlin.jvm") version "2.1.20" }
+ 
+ repositories { mavenCentral() }
+ 
+ group = "com.facebook.react"
+ 
+-dependencies { implementation(libs.junit) }
++dependencies { implementation("junit:junit:4.13.2") }
+ 
+ java { targetCompatibility = JavaVersion.VERSION_11 }
+ 
+diff --git a/node_modules/@react-native/gradle-plugin/shared/build.gradle.kts b/node_modules/@react-native/gradle-plugin/shared/build.gradle.kts
+index 5a74b56..cbfa840 100644
+--- a/node_modules/@react-native/gradle-plugin/shared/build.gradle.kts
++++ b/node_modules/@react-native/gradle-plugin/shared/build.gradle.kts
+@@ -10,17 +10,17 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+ import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
+ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+ 
+-plugins { alias(libs.plugins.kotlin.jvm) }
++plugins { id("org.jetbrains.kotlin.jvm") version "2.1.20" }
+ 
+ repositories { mavenCentral() }
+ 
+ group = "com.facebook.react"
+ 
+ dependencies {
+-  implementation(libs.gson)
+-  implementation(libs.guava)
+-  testImplementation(libs.junit)
+-  testImplementation(libs.assertj)
++  implementation("com.google.code.gson:gson:2.8.9")
++  implementation("com.google.guava:guava:31.0.1-jre")
++  testImplementation("junit:junit:4.13.2")
++  testImplementation("org.assertj:assertj-core:3.25.1")
+   testImplementation(project(":shared-testutil"))
+ }
+ 
